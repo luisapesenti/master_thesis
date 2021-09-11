@@ -56,7 +56,7 @@ if __name__ == '__main__':
     plt.subplots(figsize=(20, 10))
     plt.title("WACC and Inflation Impact on Scenario 2")
     plt.rc('font', size=20)  # controls default text sizes
-    ax = sns.heatmap(heatmap1, linewidth=0.3, xticklabels=infl_range, yticklabels=wacc_range, annot=True, fmt=".2f")
+    ax = sns.heatmap(heatmap1, linewidth=0.3, xticklabels=infl_range, yticklabels=wacc_range, annot=True)
     plt.tight_layout()
     plt.xlabel(" Inflation Rate [%]", fontsize=20)
     plt.ylabel("WACC [%]", fontsize=20)
