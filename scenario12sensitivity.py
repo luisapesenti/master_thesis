@@ -8,15 +8,16 @@ from scenario1onlypv import pv_only_scenario
 from scenario2dummy import pv_bess_dummy
 from thesis.energy import get_tariff, get_dispatch
 from thesis.util import get_yaml
-
+import matplotlib
+matplotlib.rcParams.update({"font.size":22})
 if __name__ == '__main__':
     # get input and config data
     input = get_yaml("./input/input1.yaml")
     config = get_yaml("./config/config.yaml")
     bess_kws = list(range(1000, 2100, 200))
     pv_sizes = list(range(15000, 25000, 1000))
-    wacc_range= list(np.linspace(0.2, 0.8, 7))
-    infl_range=list(np.linspace(0.002, 0.03, 7))
+    wacc_range= list(np.around(np.linspace(0.02, 0.08, 7), 2))
+    infl_range=list(np.around(np.linspace(0.002, 0.03, 7), 3))
     heatmap = np.zeros((len(pv_sizes), len(bess_kws)))
     heatmap1 = np.zeros((len(wacc_range), len(infl_range)))
     for pv_i, pv in enumerate(pv_sizes):
@@ -27,13 +28,15 @@ if __name__ == '__main__':
             input["bess_energy"] = bess_kw * 4
             lcoe_2, npv_2, irr_2, pbt_2 = pv_bess_dummy(input, config)
             heatmap[pv_i][bess_kw_i] = (irr_2-irr_1)*100
+    # get input and config data
+    input = get_yaml("./input/input1.yaml")
+    config = get_yaml("./config/config.yaml")
     for wacc_i, wacc in enumerate(wacc_range):
         input["wacc"] = wacc
-        lcoe_1, npv_1, irr_1, pbt_1 = pv_only_scenario(input, config)
         for infl_i, infl in enumerate(infl_range):
             config["financial"]["inflation"] = infl
             lcoe_2, npv_2, irr_2, pbt_2 = pv_bess_dummy(input, config)
-            heatmap1[wacc_i][infl_i] = irr_2 * 100
+            heatmap1[wacc_i][infl_i] = int(np.around(npv_2,0))
 
     plt.subplots(figsize=(20, 10))
     plt.title("PV and battery size impact on IRR", fontsize=20)
@@ -53,7 +56,7 @@ if __name__ == '__main__':
     plt.subplots(figsize=(20, 10))
     plt.title("WACC and Inflation Impact on Scenario 2")
     plt.rc('font', size=20)  # controls default text sizes
-    ax = sns.heatmap(heatmap1, linewidth=0.3, xticklabels=infl_range, yticklabels=wacc_range, annot=True)
+    ax = sns.heatmap(heatmap1, linewidth=0.3, xticklabels=infl_range, yticklabels=wacc_range, annot=True, fmt=".2f")
     plt.tight_layout()
     plt.xlabel(" Inflation Rate [%]", fontsize=20)
     plt.ylabel("WACC [%]", fontsize=20)
