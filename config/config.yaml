@@ -1,0 +1,90 @@
+pv_capex:
+  modules: 190 # €/kW
+  bos: 150
+  tracker: 0
+  civil_work: 2.00  # €/m2
+  land_pv: 25       # m2/kW
+  land_cost: 0.5   # €/m2
+  engineering: 70
+  opex: 10
+  degradation: 0.004
+financial:
+  inflation: 0.019
+  duration: 20
+
+  #Input Scenario 2
+
+bess:
+  min_soc: 0.05
+  max_soc: 0.95
+  rte: 0.9
+
+bess_capex_2h:
+  modules_inverters: 250
+  bos: 70
+  civil_work: 10
+  engineering: 10
+  opex: 1
+bess_capex_4h:
+  modules_inverters: 190
+  bos: 70
+  civil_work: 10
+  engineering: 10
+  opex: 1
+
+colocation:
+  reduction: 0.078
+  land_augmentation: 0.001
+
+
+bess_degradation_2h:
+  - 1.00
+  - 0.97
+  - 0.94
+  - 0.91
+  - 0.88
+  - 0.85
+  - 0.82
+  - 0.79
+  - 0.76
+  - 0.74
+  - 0.72
+  - 0.70
+  - 0.68
+  - 0.665
+  - 0.65
+  - 0.635
+  - 0.62
+  - 0.605
+  - 0.595
+  - 0.585
+
+bess_degradation_4h:
+  - 1.00
+  - 0.97
+  - 0.94
+  - 0.91
+  - 0.88
+  - 0.85
+  - 0.82
+  - 0.80
+  - 0.78
+  - 0.76
+  - 0.74
+  - 0.73
+  - 0.72
+  - 0.71
+  - 0.705
+  - 0.70
+  - 0.695
+  - 0.69
+  - 0.685
+  - 0.68
+
+
+
+
+
+
+
+

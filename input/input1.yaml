@@ -1,0 +1,40 @@
+# General Input
+pv_profile_10mw_path: ./pv_profiles/sardinia.csv
+pv_profile_size: 10000
+pv_size: 20000
+max_export: 10000
+ppa:
+  zero: 0
+  base: 0.04
+  peak: 0.08
+tariff:
+  - zero
+  - zero
+  - zero
+  - zero
+  - zero
+  - zero
+  - base
+  - base
+  - base
+  - base
+  - base
+  - base
+  - peak
+  - peak
+  - peak
+  - base
+  - base
+  - base
+  - peak
+  - peak
+  - peak
+  - base
+  - base
+  - zero
+wacc: 0.05
+
+# Input for Scenario 2
+bess_energy: 4000
+bess_power: 1000
+bess_duration: 4
